@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from 'react';
+import ImageBack from "./assets/aliceandalan.jpeg";
+import Image from 'next/image';
+import "./styles.css"
 
 export default function Home() {
   const [buttonSize, setButtonSize] = useState(10); // Base size for the "No te perdono" button
@@ -33,6 +36,7 @@ export default function Home() {
   return (
     <div
       id="button-container"
+      className='main-container-profile '
       style={{
         position: 'relative',
         display: 'flex',
@@ -40,12 +44,15 @@ export default function Home() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
+        backgroundImage: `url(${ImageBack})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <p style={{ fontSize: '24px', margin: '20px' }}>¿Me perdonas?</p>
       <div>
         <button
-          style={{ marginRight: '10px', backgroundColor: 'green', color: 'white', padding: '10px 20px' }}
+          style={{ marginRight: '10px', backgroundColor: 'green', color: 'white', padding: '10px 20px', borderRadius: "15px", minHeight:"4rem", minWeight:"4rem" }}
           onClick={() => handleClickRedButton()}
         >
           Sí, te perdono mv
@@ -59,6 +66,7 @@ export default function Home() {
             color: 'white',
             padding: `${10}px`,
             transition: 'padding 0.2s ease',
+            borderRadius: "15px", minHeight:"4rem", minWeight:"4rem"
           }}
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}

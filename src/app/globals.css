@@ -8,6 +8,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  background: url("./assets/aliceandalan.jpeg") no-repeat cover;
+  background-size: 'cover';
+        background-position: 'center';
 
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,

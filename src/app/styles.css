@@ -1,0 +1,6 @@
+.main-container-profile {
+    background: url("./assets/aliceandalan.jpeg") no-repeat;
+    background-origin: padding-box;
+    width: 100%;
+    background-color: var(--neutrales1);
+  }

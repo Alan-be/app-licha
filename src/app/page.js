@@ -1,95 +1,72 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import React, { useState } from 'react';
 
 export default function Home() {
+  const [buttonSize, setButtonSize] = useState(10); // Base size for the "No te perdono" button
+  const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0 });
+
+  const handleMouseOver = () => {
+    setButtonSize(currentSize => currentSize + 5);
+  };
+
+  const handleMouseOut = () => {
+    setButtonSize(currentSize => Math.max(100, currentSize - 3)); // Prevents the button from becoming too small
+  };
+
+  const handleClickMove = () => {
+    const container = document.getElementById('button-container');
+    if (container) {
+      const containerRect = container.getBoundingClientRect();
+      const randomTop = Math.random() * (containerRect.height - buttonSize);
+      const randomLeft = Math.random() * (containerRect.width - buttonSize);
+      setButtonPosition({ top: randomTop, left: randomLeft });
+    }
+  };
+
+  const handleClickRedButton = () => {
+    alert('Mañana vamos por mi camisa??')
+    const youtubeLink = 'https://www.youtube.com/watch?v=maYnIz4GpEQ';
+    window.location.href = youtubeLink;
+  };
+
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div
+      id="button-container"
+      style={{
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+      }}
+    >
+      <p style={{ fontSize: '24px', margin: '20px' }}>¿Me perdonas?</p>
+      <div>
+        <button
+          style={{ marginRight: '10px', backgroundColor: 'green', color: 'white', padding: '10px 20px' }}
+          onClick={() => handleClickRedButton()}
+        >
+          Sí, te perdono mv
+        </button>
+        <button
+          style={{
+            position: 'absolute',
+            top: buttonPosition.top,
+            left: buttonPosition.left,
+            backgroundColor: 'red',
+            color: 'white',
+            padding: `${10}px`,
+            transition: 'padding 0.2s ease',
+          }}
+          onMouseOver={handleMouseOver}
+          onMouseOut={handleMouseOut}
+          onClick={() => handleClickMove()}
+        >
+          No te perdono
+        </button>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }

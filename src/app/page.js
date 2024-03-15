@@ -44,6 +44,7 @@ export default function Home() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
+        width: '100%',
         backgroundImage: `url(${ImageBack})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
